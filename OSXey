@@ -127,15 +127,17 @@ terminal="$TERM"
 
 # ==PACKAGE MANAGER==
 
-# check if brew or macports is installed, then total there packages and set packagehandler 
+# build packageinfo string for brew and macports if they installed
+packageinfo=""
 if [ -e /usr/local/bin/brew ]
 then
 	brewpackages=$(brew list -l | tail -n +2 | wc -l)
-	packagehandler=$brewpackages
-elif [ -f /opt/local/bin/port ] #don't think this is the right directory, need to check later.
+	packageinfo=$(echo -e "$packageinfo${textColor}Brew:${normal} $brewpackages ")
+fi
+if [ -f /opt/local/bin/port ] #don't think this is the right directory, need to check later.
 then 
 	macportpackages="`port installed | wc -l | awk '{print $1 }'`"
-	packagehandler=$macportpackages
+	packageinfo=$(echo -e "$packageinfo${textColor}MacPorts:${normal} $macportpackages")
 fi
 
 # ==CPU==
@@ -161,7 +163,7 @@ kernelText="${textColor}Kernel:${normal}"
 uptimeText="${textColor}Uptime:${normal}"
 shellText="${BL}${textColor}Shell:${normal}"
 terminalText="${textColor}Terminal:${normal}"
-packagehandlerText="${textColor}Packages:${normal}"
+packageinfoText="${textColor}Packages:${normal}"
 cpuText="${textColor}CPU:${normal}"
 memoryText="${textColor}Memory:${normal}"
 diskText="${textColor}Disk:${normal}"
@@ -178,7 +180,7 @@ ${YE}    #####################'        $kernelText $kernel
 ${YE}    #####################         $uptimeText $uptime
 ${LR}    #####################         $shellText $shell
 ${RE}    ######################,       $terminalText $terminal
-${RE}     #######################      $packagehandlerText $packagehandler
+${RE}     #######################      $packageinfoText $packageinfo
 ${PU}      ####################'       $cpuText $cpu
 ${BL}        #################'        $memoryText $mem
 ${BL}         '####''''####'           $diskText $disk
