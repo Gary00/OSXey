@@ -1,5 +1,62 @@
 #!/bin/bash
 
+# Colors Variables
+red="1"
+green="2"
+yellow="3"
+blue="4"
+purple="5"
+lightblue="6"
+grey="7"
+
+textColor=$(tput setaf $lightblue)
+normal=$(tput sgr0)
+
+# While loops for script arguments
+while [ $# -gt 0 ]
+do
+	case "$1" in
+
+    -c|--color) 
+			GR='\033[00;32m'
+			YE='\033[00;33m'
+			LR='\033[01;31m'
+			RE='\033[00;31m'
+			PU='\033[00;35m'
+			CY='\033[00;36m'
+			BL='\033[00;34m'
+    	    shift
+            ;;
+	-red)
+			textColor=$(tput setaf $red)
+			shift
+			;;
+	-green)
+			textColor=$(tput setaf $green)
+			shift
+			;;
+	-yellow)
+			textColor=$(tput setaf $yellow)
+			shift
+			;;
+	-blue)
+			textColor=$(tput setaf $blue)
+			shift
+			;;
+	-purple)
+			textColor=$(tput setaf $purple)
+			shift
+			;;
+	-grey)
+			textColor=$(tput setaf $grey)
+			shift
+			;;
+	*)
+			break
+			;;
+	esac
+done
+
 # ==USER==
 user=$(whoami)
 
@@ -93,62 +150,7 @@ mem="$((mem/1000000000)) GB"
 # ==DISK==
 disk=`df | head -2 | tail -1 | awk '{print $5}'`
 
-# Colors Variables
-red="1"
-green="2"
-yellow="3"
-blue="4"
-purple="5"
-lightblue="6"
-grey="7"
 
-textColor=$(tput setaf $lightblue)
-normal=$(tput sgr0)
-
-# While loops for script arguments
-while [ $# -gt 0 ]
-do
-	case "$1" in
-
-    -c|--color) 
-			GR='\033[00;32m'
-			YE='\033[00;33m'
-			LR='\033[01;31m'
-			RE='\033[00;31m'
-			PU='\033[00;35m'
-			CY='\033[00;36m'
-			BL='\033[00;34m'
-    	    shift
-            ;;
-	-red)
-			textColor=$(tput setaf $red)
-			shift
-			;;
-	-green)
-			textColor=$(tput setaf $green)
-			shift
-			;;
-	-yellow)
-			textColor=$(tput setaf $yellow)
-			shift
-			;;
-	-blue)
-			textColor=$(tput setaf $blue)
-			shift
-			;;
-	-purple)
-			textColor=$(tput setaf $purple)
-			shift
-			;;
-	-grey)
-			textColor=$(tput setaf $grey)
-			shift
-			;;
-	*)
-			break
-			;;
-	esac
-done
 
 
 userText="${textColor}User:${normal}"
