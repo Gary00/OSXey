@@ -114,7 +114,7 @@ esac
 version="OS X $versionNumber $versionString"
 
 # ==KERNEL==
-kernel="XNU"
+kernel=$(uname -sr)
 
 # ==UPTIME==
 uptime=$(uptime | sed 's/.*up \([^,]*\), .*/\1/')
