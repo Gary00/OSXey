@@ -1,5 +1,18 @@
 #!/bin/bash
 
+## directory Bash script stored in
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
+
+
 # Colors Variables
 red="1"
 green="2"
@@ -71,7 +84,7 @@ fi
 # ==MODEL==
 model=$(system_profiler SPHardwareDataType -detailLevel mini | awk '/Model Identifier/ { print $3 }')
 # use grep to find the model in the list, then delete from ) to end of line
-modelname=`grep $model Models.txt | sed -e 's/).*/)/g'`
+modelname=`grep $model ${DIR}/../Models.txt | sed -e 's/).*/)/g'`
 
 # ==VERSION==
 versionNumber=$(sw_vers -productVersion) # Finds version number
