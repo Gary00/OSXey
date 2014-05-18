@@ -38,14 +38,16 @@ Options
 Recent Changes
 --------------
 
-* (Addtion) Options for changing text color
+* (Addition) Options for changing text color
 * (Optimization) Removed Escape Characters from ASCII art
 * (Optimization) Renamed color variables to all be same length - helps when echoing
 * (Optimzation) Aligned ASCII art / text in echo statement
 * (Addition) Added model field to display Mac Model ID
 * (Features) Display more precise model details (e.g. iMac 27-inch, Late 2012)
 * (Features) Smarter install script (create directory if doesn't exist, prompt if already uninstalled)
-
+* Move script args handler on top for earlier availability
+* Display package info for both brew and ports
+* Display kernel using 'uname -sr'
 
 To-Do List
 ------------
