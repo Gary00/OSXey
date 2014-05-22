@@ -1,97 +1,17 @@
 #!/bin/bash
 
-# ==USER==
-user=$(whoami)
+## directory Bash script stored in
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# ==HOSTNAME==
-hostname=$(HOSTNAME | sed 's/.local//g')
-# if hostname is >35 characters, truncates to make it fit on std. 80 window
-if [ ${#HOSTNAME} -gt 35 ]
-then
-   hostname=${HOSTNAME:0:35}
-fi
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 
-# ==MODEL==
-model=$(system_profiler SPHardwareDataType -detailLevel mini | awk '/Model Identifier/ { print $3 }')
-# use grep to find the model in the list, then delete from ) to end of line
-modelname=`grep $model Models.txt | sed -e 's/).*/)/g'`
 
-# ==VERSION==
-versionNumber=$(sw_vers -productVersion) # Finds version number
-
-versionShort=${versionNumber:0:4}  # Cut sting to 1 decimal place for calculation
-		 
-case $versionShort in
-	10.9)
-		versionString="Mavericks"
-		;;
-	10.8)
-		versionString="Mountian Lion"
-		;;
-	10.7)
-		versionString="Lion"
-		;;
-	10.6)
-		versionString="Snow Leopard"
-		;;
-	10.5)
-		versionString="Leopard"
-		;;
-	10.4)
-		versionString="Tiger"
-		;;
-	10.3)
-		versionString="Panther"
-		;;
-	10.2)
-		versionString="Jaguar"
-		;;
-	10.1)
-		versionString="Puma"
-		;;
-	10.0)
-		versionString="Cheetah"
-		;;
-esac
-	
-version="OS X $versionNumber $versionString"
-
-# ==KERNEL==
-kernel="XNU"
-
-# ==UPTIME==
-uptime=$(uptime | sed 's/.*up \([^,]*\), .*/\1/')
-
-# ==SHELL==
-shell="$SHELL"
-
-# ==TERMINAL==
-terminal="$TERM"
-
-# ==PACKAGE MANAGER==
-
-# check if brew or macports is installed, then total there packages and set packagehandler 
-if [ -e /usr/local/bin/brew ]
-then
-	brewpackages=$(brew list -l | tail -n +2 | wc -l)
-	packagehandler=$brewpackages
-elif [ -f /opt/local/bin/port ] #don't think this is the right directory, need to check later.
-then 
-	macportpackages="`port installed | wc -l | awk '{print $1 }'`"
-	packagehandler=$macportpackages
-fi
-
-# ==CPU==
-cpu=$(sysctl -n machdep.cpu.brand_string)
-# removes (R) and (TM) from the CPU name so it fits in a standard 80 window
-cpu=$(echo "$cpu" | awk '$1=$1' | sed 's/([A-Z]\{1,2\})//g')
- 
-# ==MEMORY==
-mem=$(sysctl -n hw.memsize)
-mem="$((mem/1000000000)) GB"
-
-# ==DISK==
-disk=`df | head -2 | tail -1 | awk '{print $5}'`
 
 # Colors Variables
 red="1"
@@ -150,6 +70,103 @@ do
 	esac
 done
 
+# ==USER==
+user=$(whoami)
+
+# ==HOSTNAME==
+hostname=$(HOSTNAME | sed 's/.local//g')
+# if hostname is >35 characters, truncates to make it fit on std. 80 window
+if [ ${#HOSTNAME} -gt 35 ]
+then
+   hostname=${HOSTNAME:0:35}
+fi
+
+# ==MODEL==
+model=$(system_profiler SPHardwareDataType -detailLevel mini | awk '/Model Identifier/ { print $3 }')
+# use grep to find the model in the list, then delete from ) to end of line
+modelname=`grep $model ${DIR}/../Models.txt | sed -e 's/).*/)/g'`
+
+# ==VERSION==
+versionNumber=$(sw_vers -productVersion) # Finds version number
+
+versionShort=${versionNumber:0:4}  # Cut sting to 1 decimal place for calculation
+		 
+case $versionShort in
+	10.9)
+		versionString="Mavericks"
+		;;
+	10.8)
+		versionString="Mountian Lion"
+		;;
+	10.7)
+		versionString="Lion"
+		;;
+	10.6)
+		versionString="Snow Leopard"
+		;;
+	10.5)
+		versionString="Leopard"
+		;;
+	10.4)
+		versionString="Tiger"
+		;;
+	10.3)
+		versionString="Panther"
+		;;
+	10.2)
+		versionString="Jaguar"
+		;;
+	10.1)
+		versionString="Puma"
+		;;
+	10.0)
+		versionString="Cheetah"
+		;;
+esac
+	
+version="OS X $versionNumber $versionString"
+
+# ==KERNEL==
+kernel=$(uname -sr)
+
+# ==UPTIME==
+uptime=$(uptime | sed 's/.*up \([^,]*\), .*/\1/')
+
+# ==SHELL==
+shell="$SHELL"
+
+# ==TERMINAL==
+terminal="$TERM"
+
+# ==PACKAGE MANAGER==
+
+# build packageinfo string for brew and macports if they installed
+packageinfo=""
+if [ -e /usr/local/bin/brew ]
+then
+	brewpackages=$(brew list -l | tail -n +2 | wc -l)
+	packageinfo=$(echo -e "$packageinfo${textColor}Brew:${normal} $brewpackages ")
+fi
+if [ -f /opt/local/bin/port ] #don't think this is the right directory, need to check later.
+then 
+	macportpackages="`port installed | wc -l | awk '{print $1 }'`"
+	packageinfo=$(echo -e "$packageinfo${textColor}MacPorts:${normal} $macportpackages")
+fi
+
+# ==CPU==
+cpu=$(sysctl -n machdep.cpu.brand_string)
+# removes (R) and (TM) from the CPU name so it fits in a standard 80 window
+cpu=$(echo "$cpu" | awk '$1=$1' | sed 's/([A-Z]\{1,2\})//g')
+ 
+# ==MEMORY==
+mem=$(sysctl -n hw.memsize)
+mem="$((mem/1000000000)) GB"
+
+# ==DISK==
+disk=`df | head -2 | tail -1 | awk '{print $5}'`
+
+
+
 
 userText="${textColor}User:${normal}"
 hostnameText="${textColor}Hostname:${normal}"
@@ -159,7 +176,7 @@ kernelText="${textColor}Kernel:${normal}"
 uptimeText="${textColor}Uptime:${normal}"
 shellText="${BL}${textColor}Shell:${normal}"
 terminalText="${textColor}Terminal:${normal}"
-packagehandlerText="${textColor}Packages:${normal}"
+packageinfoText="${textColor}Packages:${normal}"
 cpuText="${textColor}CPU:${normal}"
 memoryText="${textColor}Memory:${normal}"
 diskText="${textColor}Disk:${normal}"
@@ -176,7 +193,7 @@ ${YE}    #####################'        $kernelText $kernel
 ${YE}    #####################         $uptimeText $uptime
 ${LR}    #####################         $shellText $shell
 ${RE}    ######################,       $terminalText $terminal
-${RE}     #######################      $packagehandlerText $packagehandler
+${RE}     #######################      $packageinfoText $packageinfo
 ${PU}      ####################'       $cpuText $cpu
 ${BL}        #################'        $memoryText $mem
 ${BL}         '####''''####'           $diskText $disk
