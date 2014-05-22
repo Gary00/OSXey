@@ -9,7 +9,13 @@ A script for OS X to display system information
 
 Install / Uninstall
 ------------
-Use 'install.sh` to both install and uninstall.
+
+### Manually:
+Use `install.sh` to both install and uninstall.
+
+### With [Homebrew](http://brew.sh):
+To install `brew install https://raw.githubusercontent.com/diimdeep/OSXey/master/osxey.rb`   
+To uninstall `brew remove osxey`
 
 
 Options
