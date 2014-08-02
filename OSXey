@@ -14,7 +14,12 @@ fi
 # ==MODEL==
 model=$(system_profiler SPHardwareDataType -detailLevel mini | awk '/Model Identifier/ { print $3 }')
 # use grep to find the model in the list, then delete from ) to end of line
-modelname=`grep $model Models.txt | sed -e 's/).*/)/g'`
+if [ -e Models.txt ]
+then
+  modelname=`grep $model Models.txt | sed -e 's/).*/)/g'`
+else
+  modelname=`echo $model`
+fi
 
 # ==GRAPHICS==
 graphics=$(system_profiler SPDisplaysDataType |
