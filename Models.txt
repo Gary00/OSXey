@@ -1,9 +1,9 @@
-# Identification of Mac models by name. Generated from the 
+# Identification of Mac models by name. Generated from the
 # apple.com website by https://github.com/jasonkliu
 # Note: Mac mini models do not follow the same convention
 # (at least from http://support.apple.com/kb/ht3476)
 # Note: Apple part numbers such as MA356LL/A may be incorrect
-# or missing as the Model Identifier Mac Pro (Early 2008) is 
+# or missing as the Model Identifier Mac Pro (Early 2008) is
 # used as the index for the values. Use the following command:
 # modelname=`grep $model Models.txt | sed -e 's/).*/)/g'`
 
@@ -13,54 +13,53 @@
 ### MacBook Pro 13-inch
 
 MacBook Pro (Retina, 13-inch, Late 2013)	MacBookPro11,1
-MacBook Pro (Retina, 13-inch, Early 2013/Late 2012)	MacBookPro10,2	
-MacBook Pro (13-inch, Mid 2012)	            MacBookPro9,2	
-MacBook Pro (13-inch, Late 2011/Early 2011)	        MacBookPro8,1	
-MacBook Pro (13-inch, Mid 2010)	            MacBookPro7,1	
-MacBook Pro (13-inch, Mid 2009)          	MacBookPro5,5	
+MacBook Pro (Retina, 13-inch, Early 2013/Late 2012)	MacBookPro10,2
+MacBook Pro (13-inch, Mid 2012)	            MacBookPro9,2
+MacBook Pro (13-inch, Late 2011/Early 2011)	        MacBookPro8,1
+MacBook Pro (13-inch, Mid 2010)	            MacBookPro7,1
+MacBook Pro (13-inch, Mid 2009)          	MacBookPro5,5
 
 ### MacBook Pro 15-inch
 
 # Spaces? Appears in the document. Have to test on real machine
 MacBook Pro (Retina, 15-inch, Late 2013) MacBookPro11,2 || MacBookPro11,3
-MacBook Pro (Retina, 15-inch, Early 2013)	MacBookPro10,1		
-MacBook Pro (Retina, Mid 2012)	MacBookPro10,1	
-MacBook Pro (15-inch, Mid 2012)	MacBookPro9,1	
-MacBook Pro (15-inch, Late 2011/Early 2011)	MacBookPro8,2	
-MacBook Pro (15-inch, Mid 2010)	MacBookPro6,2	
-MacBook Pro (15-inch, Mid 2009)	MacBookPro5,3	
-MacBook Pro (15-inch, Late 2008)	MacBookPro5,1	
-MacBook Pro (15-inch, Early 2008)	MacBookPro4,1	
-MacBook Pro (15-inch, 2.4/2.2 GHz)	MacBookPro3,1	
-MacBook Pro (15-inch, Core 2 Duo)	MacBookPro2,2	
-MacBook Pro (15-inch, Glossy)	MacBookPro1,1	
+MacBook Pro (Retina, 15-inch, Mid 2012/Early 2013)	MacBookPro10,1	
+MacBook Pro (15-inch, Mid 2012)	MacBookPro9,1
+MacBook Pro (15-inch, Late 2011/Early 2011)	MacBookPro8,2
+MacBook Pro (15-inch, Mid 2010)	MacBookPro6,2
+MacBook Pro (15-inch, Mid 2009)	MacBookPro5,3
+MacBook Pro (15-inch, Late 2008)	MacBookPro5,1
+MacBook Pro (15-inch, Early 2008)	MacBookPro4,1
+MacBook Pro (15-inch, 2.4/2.2 GHz)	MacBookPro3,1
+MacBook Pro (15-inch, Core 2 Duo)	MacBookPro2,2
+MacBook Pro (15-inch, Glossy)	MacBookPro1,1
 
 ### MacBook Pro (17-inch)
 
-MacBook Pro (17-inch, Late 2011/Early 2011)	MacBookPro8,3	
-MacBook Pro (17-inch, Mid 2010)	MacBookPro6,1	
-MacBook Pro (17-inch, Mid 2009/Early 2009)	MacBookPro5,2	
+MacBook Pro (17-inch, Late 2011/Early 2011)	MacBookPro8,3
+MacBook Pro (17-inch, Mid 2010)	MacBookPro6,1
+MacBook Pro (17-inch, Mid 2009/Early 2009)	MacBookPro5,2
 MacBook Pro (17-inch, Late 2008)	MacBookPro5,1
 MacBook Pro (17-inch, Early 2008)	MacBookPro4,1
-MacBook Pro (17-inch, 2.4 GHz, Late 2007)	MacBookPro3,1	
-MacBook Pro (17-inch, Core 2 Duo)	MacBookPro2,1	
-MacBook Pro (17-inch)	MacBookPro1,2	
+MacBook Pro (17-inch, 2.4 GHz, Late 2007)	MacBookPro3,1
+MacBook Pro (17-inch, Core 2 Duo)	MacBookPro2,1
+MacBook Pro (17-inch)	MacBookPro1,2
 
 
 
 # How to identify MacBook Air models
 # Taken from http://support.apple.com/kb/ht3255
 
-MacBook Air (13-inch, Mid 2013)	MacBookAir6,2	
-MacBook Air (11-inch, Mid 2013)	MacBookAir6,1	
-MacBook Air (13-inch, Mid 2012)	MacBookAir5,2	
-MacBook Air (11-inch, Mid 2012)	MacBookAir5,1	
-MacBook Air (13-inch, Mid 2011)	MacBookAir4,2	
-MacBook Air (11-inch, Mid 2011)	MacBookAir4,1	
-MacBook Air (13-inch, Late 2010)	MacBookAir3,2	
-MacBook Air (11-inch, Late 2010)	MacBookAir3,1 	
-MacBook Air (13-inch, Mid 2009/Late 2008)	MacBookAir2,1	
-MacBook Air (13-inch, Early 2008)	MacBookAir1,1	
+MacBook Air (13-inch, Mid 2013)	MacBookAir6,2
+MacBook Air (11-inch, Mid 2013)	MacBookAir6,1
+MacBook Air (13-inch, Mid 2012)	MacBookAir5,2
+MacBook Air (11-inch, Mid 2012)	MacBookAir5,1
+MacBook Air (13-inch, Mid 2011)	MacBookAir4,2
+MacBook Air (11-inch, Mid 2011)	MacBookAir4,1
+MacBook Air (13-inch, Late 2010)	MacBookAir3,2
+MacBook Air (11-inch, Late 2010)	MacBookAir3,1
+MacBook Air (13-inch, Mid 2009/Late 2008)	MacBookAir2,1
+MacBook Air (13-inch, Early 2008)	MacBookAir1,1
 
 
 
@@ -74,9 +73,9 @@ iMac (21.5-inch, Mid 2011)	 iMac12,1	MC812XX/A
 iMac (27-inch, Mid 2011)	 iMac12,2	MC814XX/A
 iMac (21.5-inch, Mid 2010)	 iMac11,2	MC509XX/A
 iMac (27-inch, Mid 2010)	 iMac11,3	MC511XX/A
-iMac (21.5-inch/27-inch, Late 2009)	iMac10,1	MC413XX/A 
+iMac (21.5-inch/27-inch, Late 2009)	iMac10,1	MC413XX/A
 iMac (27-inch, Late 2009)	iMac11,1	MB953XX/A
-iMac (20-inch/24-inch, Early 2009)	iMac9,1	MB417XX/A     
+iMac (20-inch/24-inch, Early 2009)	iMac9,1	MB417XX/A
 iMac (20-inch/24-inch, Early 2008)	 iMac8,1	MB323XX/A
 iMac (20-inch/24-inch, Mid 2007)	iMac7,1	MA876XX/A
 iMac (17-inch/20-inch, Late 2006)	iMac5,1	MA589xx/A
@@ -89,8 +88,7 @@ iMac (17-inch/20-inch, Early 2006)	iMac4,1	MA200xx/A
 
 Mac Pro (Late 2013)	        MacPro6,1	ME253LL/A
 Mac Pro (Mid 2012/Mid 2010)	MacPro5,1	MD771LL/A
-Mac Pro (Early 2009)	    MacPro4,1	MB871LL/A 
+Mac Pro (Early 2009)	    MacPro4,1	MB871LL/A
 Mac Pro (Early 2008)	    MacPro3,1	MA970LL/A
 Mac Pro (8-core)	        MacPro2,1	MA1186/A
 Mac Pro	(original)          MacPro1,1	MA356LL/A
-

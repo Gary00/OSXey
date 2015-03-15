@@ -28,15 +28,23 @@ awk '/Model/{for (i=1; i<=NF-3; i++) $i = $(i+3); NF-=3; print}' | paste -sd "/"
 # > Chipset Model: NVIDIA GeForce GT 330M
 # Use awk with a loop to print the arguments after Model: to end of line
 # Use paste to join multiple lines together with a slash if necessary.
-# Sample output: 
+# Sample output:
 # > graphics:        Intel HD Graphics/NVIDIA GeForce GT 330M
 # > graphicsnoBrand: HD Graphics/GeForce GT 330M
+
+# ==IP ADDRESS==
+
+## en1 or en0 should contain the ip address
+ipAddress=`ipconfig getifaddr en1`
+if [ -z "$ipAddress" ]; then
+    ipAddress=`ipconfig getifaddr en0`
+fi
 
 # ==VERSION==
 versionNumber=$(sw_vers -productVersion) # Finds version number
 
 versionShort=${versionNumber:0:4}  # Cut sting to 1 decimal place for calculation
-		 
+
 case $versionShort in
 	10.9)
 		versionString="Mavericks"
@@ -69,7 +77,7 @@ case $versionShort in
 		versionString="Cheetah"
 		;;
 esac
-	
+
 version="OS X $versionNumber $versionString"
 
 # ==KERNEL==
@@ -86,28 +94,30 @@ terminal="$TERM"
 
 # ==PACKAGE MANAGER==
 
-# check if brew or macports is installed, then total there packages and set packagehandler 
+# check if brew or macports is installed, then total there packages and set packagehandler
 if [ -e /usr/local/bin/brew ]
 then
 	brewpackages=$(brew list -l | tail -n +2 | wc -l)
 	packagehandler=$brewpackages
 elif [ -f /opt/local/bin/port ] #don't think this is the right directory, need to check later.
-then 
+then
 	macportpackages="`port installed | wc -l | awk '{print $1 }'`"
 	packagehandler=$macportpackages
+else
+    packagehandler=0
 fi
 
 # ==CPU==
 cpu=$(sysctl -n machdep.cpu.brand_string)
 # removes (R) and (TM) from the CPU name so it fits in a standard 80 window
 cpu=$(echo "$cpu" | awk '$1=$1' | sed 's/([A-Z]\{1,2\})//g')
- 
+
 # ==MEMORY==
 mem=$(sysctl -n hw.memsize)
 mem="$((mem/1000000000)) GB"
 
 # ==DISK==
-disk=`df -Hl | head -2 | tail -1` 
+disk=`df -Hl | head -2 | tail -1`
 dpercent=`echo $disk | awk '{print $5}'`
 dfree=`echo $disk | awk '{print $4}'`
 dused=`echo $disk | awk '{print $3}'`
@@ -130,7 +140,7 @@ while [ $# -gt 0 ]
 do
 	case "$1" in
 
-    -c|--color) 
+    -c|--color)
 			GR='\033[00;32m'
 			YE='\033[00;33m'
 			LR='\033[01;31m'
@@ -177,30 +187,30 @@ modelText="${textColor}Model:${normal}"
 versionText="${textColor}Version:${normal}"
 kernelText="${textColor}Kernel:${normal}"
 uptimeText="${textColor}Uptime:${normal}"
-shellText="${BL}${textColor}Shell:${normal}"
+shellText="${textColor}Shell:${normal}"
 terminalText="${textColor}Terminal:${normal}"
-packagehandlerText="${textColor}Packages:${normal}"
+packagehandlerText="${BL}${textColor}Packages:${normal}"
 cpuText="${textColor}CPU:${normal}"
 memoryText="${textColor}Memory:${normal}"
 graphicsText="${textColor}Graphics:$normal"
 diskText="${textColor}Disk:${normal}"
+ipText="${textColor}Internal Ip:${normal}"
 
 echo -e "
 
-${GR}                     ,
-${GR}                  ,##;            $userText $user
-${GR}                 ####             $hostnameText $hostname
-${GR}                ;#'               $modelText $modelname
-${GR}       ,#####;,   ,;#####;,       $versionText $version
-${GR}     ######################'      $kernelText $kernel
-${YE}    #####################'        $uptimeText $uptime
-${YE}    #####################         $shellText $shell
-${LR}    #####################         $terminalText $terminal
-${RE}    ######################,       $packagehandlerText $packagehandler
-${RE}     #######################      $cpuText $cpu
-${PU}      ####################'       $memoryText $mem
-${BL}        #################'        $graphicsText $graphicsnoBrand
-${BL}         '####''''####'           $diskText $dused / $dcapacity, $dpercent
+${GR}                     ,            $userText $user
+${GR}                  ,##;            $hostnameText $hostname
+${GR}                 ####             $modelText $modelname
+${GR}                ;#'               $versionText $version
+${GR}       ,#####;,   ,;#####;,       $kernelText $kernel
+${GR}     ######################'      $uptimeText $uptime
+${YE}    #####################'        $shellText $shell
+${YE}    #####################         $terminalText $terminal
+${LR}    #####################         $packagehandlerText $packagehandler
+${RE}    ######################,       $cpuText $cpu
+${RE}     #######################      $memoryText $mem
+${PU}      ####################'       $graphicsText $graphicsnoBrand
+${BL}        #################'        $diskText $dused / $dcapacity, $dpercent
+${BL}         '####''''####'           $ipText $ipAddress
                                        ${normal}
 "
-
