@@ -10,6 +10,19 @@
 # How to identify MacBook Pro models
 # Taken from http://support.apple.com/kb/ht4132
 
+### MacBook
+
+MacBook (12-inch, Early 2015)                   MacBook8,1
+MacBook (13-inch, White, Mid 2010)              MacBook7,1
+MacBook (13-inch, White, Late 2009)             MacBook6,1
+MacBook (13-inch, White, Mid 2009/Early 2009)   MacBook5,2
+MacBook (13-inch, Aluminum, Late 2008)          MacBook5,1
+MacBook (13-inch, White, Late 2008)             MacBook4,2
+MacBook (13-inch, Early 2008)                   MacBook4,1
+MacBook (13-inch, Late 2007)                    MacBook3,1
+MacBook (13-inch, Mid 2007/Late 2006)           MacBook2,1
+MacBook (13-inch, Early 2006)                   MacBook1,1
+
 ### MacBook Pro 13-inch
 
 MacBook Pro (Retina, 13-inch, Early 2015)   MacBookPro12,1
