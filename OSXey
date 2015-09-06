@@ -107,6 +107,9 @@ versionNumber=$(sw_vers -productVersion) # Finds version number
 [[ $versionNumber =~ ^[0-9]+\.[0-9]+ ]] && versionShort="${BASH_REMATCH[0]}" # Get first 2 portions of semver
 
 case $versionShort in
+	10.11)
+		versionString="El Capitan (BETA)"
+		;;
 	10.10)
 		versionString="Yosemite"
 		;;
