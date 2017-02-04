@@ -68,7 +68,10 @@ MacBook Air (13-inch, Early 2008)	MacBookAir1,1
 
 # How to identify iMac models
 # Taken from http://support.apple.com/kb/ht1758
-iMac (Retina, 27-inch, Late 2014)   iMac15,1   MF886XX/A
+iMac (Retina 4K, 21.5-inch, Late 2015)   iMac16,2   MK452XX/A
+iMac (21.5-inch, Late 2015)   iMac16,1   MK442XX/A MK142XX/A
+iMac (Retina 5K, 27-inch, Late 2015)   iMac17,1   MK462XX/A MK472XX/A MK482XX/A
+iMac (Retina 5K, 27-inch, Late 2014)   iMac15,1   MF886XX/A
 iMac (21.5-inch, Mid 2014)   iMac14,4   MF883LL/A
 iMac (21.5-inch, Late 2013)	 iMac14,1	ME086XX/A
 iMac (27-inch, Late 2013)	 iMac14,2	ME088XX/A
